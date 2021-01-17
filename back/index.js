@@ -42,7 +42,7 @@ pool.end();
 app.get('/types', async(req, res) => {
 
  try {
-   const query = await pool.query("select ordinal_position AS num, column_name as name, data_type as typ, character_maximum_length as lenth  from INFORMATION_SCHEMA.COLUMNS WHERE table_catalog='bookit' AND table_name='clients'");
+   const query = await pool.query("select ordinal_position AS num, column_name as name, data_type as typ, character_maximum_length as lenth  from INFORMATION_SCHEMA.COLUMNS WHERE table_catalog='bd' AND table_name='clients'");
    res.json(query.rows);
  }
   catch (error) {
@@ -51,7 +51,7 @@ app.get('/types', async(req, res) => {
 })
 
 
-//ici je recupere le nom de toute les tables presente dans ma base et je vais use cela avec ma base de navigation
+//ici je recupere le nom de toute les tables presente dans ma base et je vais use cela avec ma bar de navigation
 app.get('/tables', async(req, res) => {
 
  try {
@@ -79,7 +79,7 @@ app.get('/singletable/:tablename', async(req, res) => {
 })
 
 
-//ici je recupere en fonction de ce quil ya fans chaque table les cle primaire et les cles etrangere
+//ici je recupere en fonction de ce quil ya dans chaque table les cle primaire et les cles etrangere
 app.get('/keys', async(req, res) => {
 
  try {

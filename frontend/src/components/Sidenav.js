@@ -42,9 +42,9 @@ const Sidenav = () => {
       <nav>
         <h1>DATABASE TABLES</h1>
         <ul>
-        {navlinks.map(lien =>( 
-       <li><a className="lien" href='#' value={lien.table_name} onClick={handleClick}>{lien.table_name}</a></li>
-        ))}
+        {navlinks.map((lien, index) =>( 
+       <li key={index}><a className="lien" href="#" value={lien.table_name} onClick={handleClick}>{lien.table_name}</a></li>
+        ))};
         </ul>
         <Displayer clicked ={clicked}/>
       </nav>

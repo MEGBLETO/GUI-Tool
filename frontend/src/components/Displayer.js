@@ -16,6 +16,8 @@ const Displayer = (props) => {
 
       const res = await result.json();
 
+      console.log(res);
+
       getTableContents(res);
 
     } catch (error) {
@@ -28,7 +30,7 @@ const Displayer = (props) => {
 
   useEffect(() =>{
    fetchtables()
-  },[]);
+  },[props.clicked]);
 
   console.log(table); 
 
