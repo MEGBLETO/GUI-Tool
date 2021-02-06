@@ -1,23 +1,23 @@
-import React, {useEffect, useState} from 'react'
-import Displayer from './Displayer'
+import React, {useState, useContext} from 'react'
+import {LinkContext} from '../Contexts/Linkcontext'
+
 
 const Sidenav = () => {
+  const {value1, value2} = useContext(LinkContext);
 
-  const [navlinks, setnavlinks] = useState([]);
-  const [clicked, setClicked] = useState([]);
+  //il sagit de recuper une array de array de json pour les liens de ma barre de navigation
+  const navlinks = value1
+  const data = navlinks[0]
+  console.log(data)
+
+
+  //pour pouvoir mettre a jour mon state a chaque fois que linfo change
+
+  const [clicked, setClicked] = value2
+
+  console.log(clicked)
+
   
-  const getnavlinks = async () =>{
-    try {
-      
-      const res = await fetch("http://localhost:5000/tables");
-      const jsonres = await res.json();
-
-         setnavlinks(jsonres)
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
   //recuperer dans une variable le nom du lien pour lutilliser pour recuperer les tables
   
   const handleClick = (e) =>{
@@ -28,28 +28,17 @@ const Sidenav = () => {
 
     };
 
-//console.log(clicked);
-
-   useEffect(() =>{
-         
-    getnavlinks();
-   },[]);
-
-   //console.log(navlinks)
-
    return (
     <div className= "navbar">
       <nav>
         <h1>DATABASE TABLES</h1>
-        <ul>
-        {navlinks.map((lien, index) =>( 
+      <ul>
+        {data.map((lien, index) =>( 
        <li key={index}><a className="lien" href="#" value={lien.table_name} onClick={handleClick}>{lien.table_name}</a></li>
         ))};
         </ul>
-        <Displayer clicked ={clicked}/>
+         {/*<Displayer clicked ={clicked}/> */ }
       </nav>
-
-      
     </div>
   )
 }

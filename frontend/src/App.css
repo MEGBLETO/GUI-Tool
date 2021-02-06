@@ -8,6 +8,7 @@
 }
 
 
+
 .entete{
   display: flex;
   width: 100%;
@@ -32,7 +33,8 @@
   display: flex;
   width: 100%;
   background-color: #f3f3f3;
-  height: 120vh;
+  height: 200vh;
+  z-index: -100;
 }
 
 .navbar{
@@ -92,5 +94,58 @@ flex-direction: column;
   display: flex;
   text-align: center;
   justify-content: center;
+  height: 100%;
 
 }
+
+
+
+
+/*diagram*/
+
+
+.diagram{
+  height: 50%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  background-color: red;
+}
+
+
+.A{
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  margin: 80px;
+}
+
+.B{
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  margin: 10px;
+}
+
+
+.C{
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  margin: 10px;
+}
+
+
+.D{
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  margin: 10px;
+}
+
+.bb{
+  width: 10%;
+  height: 10%;
+}
+

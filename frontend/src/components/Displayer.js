@@ -1,9 +1,10 @@
 import React, {useState, useEffect}from 'react'
+import Diagram from './Diagram'
 
-const Displayer = (props) => {
+const Displayer = () => {
   //ici je  recupere la valeur clicked de mon props 
 
-  const clicked = props.clicked;
+  /*const clicked = props.clicked;
   console.log(clicked);
 
   const [table, getTableContents] = useState([]);
@@ -33,10 +34,10 @@ const Displayer = (props) => {
   },[props.clicked]);
 
   console.log(table); 
-
+*/
   return (
     <div className="montreur">
-      <h1>Hello World</h1>
+      <Diagram/>
     </div>
   )
 }

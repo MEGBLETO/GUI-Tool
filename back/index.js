@@ -111,6 +111,20 @@ ORDER BY "self_schema", "self_table";`);
 })
 
 
+//ici je veux recuperer toute les tables presente dans la base ainsi que les attributs associer a  chacune d'elle
+
+app.get('/fullsend', async(req, res)=>{
+  try {
+    const query = await pool.query(`SELECT * 
+    FROM INFORMATION_SCHEMA.COLUMNS`)
+
+     res.json(query.rows);
+
+  } catch (error) {
+    console.log(error.message);
+  }
+})
+
 
 
 

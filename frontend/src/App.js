@@ -1,12 +1,15 @@
 import './App.css';
 import Entete from './components/Entete'
 import Maincon from './components/Maincon'
+import {LinkProvider} from './Contexts/Linkcontext'
 
 function App() {
   return (
     <div className="App">
-      <Entete/>
-      <Maincon/>
+      <LinkProvider>
+         <Entete/>
+         <Maincon/>
+      </LinkProvider>
 
     </div>
   );
