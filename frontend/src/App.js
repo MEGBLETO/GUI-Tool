@@ -1,17 +1,22 @@
 import './App.css';
 import Entete from './components/Entete'
 import Maincon from './components/Maincon'
+import {ModalProvider} from './Contexts/Modalcontext'
 import {LinkProvider} from './Contexts/Linkcontext'
+import Connect from './components/Connect'
+
 
 function App() {
   return (
-    <div className="App">
+   <ModalProvider>
       <LinkProvider>
+    <div className="App">
          <Entete/>
+         <Connect/>
          <Maincon/>
-      </LinkProvider>
-
     </div>
+      </LinkProvider>
+    </ModalProvider>
   );
 }
 
