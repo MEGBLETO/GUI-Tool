@@ -14,7 +14,7 @@ export const LinkProvider = props => {
   const getnavlinks = async () =>{
     try {
       
-      const res = await fetch("http://localhost:5000/tables");
+      const res = await fetch("http://localhost:5000/api/tables");
       const jsonres = await res.json();
          setnavlinks(jsonres)
     } catch (error) {

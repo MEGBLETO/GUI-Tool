@@ -1,5 +1,7 @@
 import React, {useContext} from 'react'
 import {Modalcontext} from '../Contexts/Modalcontext'
+import {Link} from 'react-router-dom'
+
 
 const Entete = () => {
 
@@ -15,6 +17,10 @@ const Entete = () => {
   return (
     <div className="entete">
       <h1>GUI <span>Tool</span></h1>
+      
+      
+
+
       <button id="btn" onClick={openModal}>Se Connecter</button>
     </div>
   )

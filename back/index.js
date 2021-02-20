@@ -11,35 +11,11 @@ app.use(cors());
 app.use(express.json()); //req.body
 
 
-
-
-//querying my database test
-
-/*let query =  `select ordinal_position AS num, column_name as name, data_type as typ, character_maximum_length as lenth 
-from INFORMATION_SCHEMA.COLUMNS
-WHERE table_catalog='bookit' AND table_name='reservation'`*/
-
-/*
-let query = `SELECT * FROM clients`;
-
-pool.query(query ,(err, resultat) =>{
-  
-  if(err){
-    console.log(err);
-  }
-
-  console.log(resultat)
- 
-  //var rows = JSON.parse(JSON.stringify(results[0]));
-pool.end();
-})
-*/
-
 //My routes 
 
 
 //ici je recupere le type de la donnee presente dans une table que nous aurons defini
-app.get('/types', async(req, res) => {
+app.get('/api/types', async(req, res) => {
 
  try {
    const query = await pool.query("select ordinal_position AS num, column_name as name, data_type as typ, character_maximum_length as lenth  from INFORMATION_SCHEMA.COLUMNS WHERE table_catalog='bd' AND table_name='clients'");
@@ -52,7 +28,7 @@ app.get('/types', async(req, res) => {
 
 
 //ici je recupere le nom de toute les tables presente dans ma base et je vais use cela avec ma bar de navigation
-app.get('/tables', async(req, res) => {
+app.get('/api/tables', async(req, res) => {
 
  try {
    const query = await pool.query("SELECT table_name FROM information_schema.tables WHERE table_type='BASE TABLE' AND table_schema='public'");
@@ -65,7 +41,7 @@ app.get('/tables', async(req, res) => {
 
 
 //ici je recupere chaque table de ma base de donnee en specifiant le nom de la table a travers ma barre de navigation
-app.get('/singletable/:tablename', async(req, res) => {
+app.get('/api/singletable/:tablename', async(req, res) => {
 
  try {
    const {tablename} = req.params;
@@ -79,8 +55,67 @@ app.get('/singletable/:tablename', async(req, res) => {
 })
 
 
+
+
+
+//ici je veux recuperer toute les tables presente dans la base ainsi que les attributs associer a  chacune d'elle
+
+app.get('/api/fullsend/:tablename', async(req, res)=>{
+  try {
+    const {tablename} = req.params;
+    const query = await pool.query(`
+    SELECT  
+    f.attnum AS number,  
+    f.attname AS name,  
+    f.attnum,  
+    f.attnotnull AS notnull,  
+    pg_catalog.format_type(f.atttypid,f.atttypmod) AS type,  
+    CASE  
+        WHEN p.contype = 'p' THEN 'true'  
+        ELSE 'false'  
+    END AS primarykey,  
+    CASE  
+        WHEN p.contype = 'u' THEN 'true'  
+        ELSE 'f'
+    END AS uniquekey,
+    CASE
+        WHEN p.contype = 'false' THEN g.relname
+    END AS foreignkey,
+    CASE
+        WHEN p.contype = 'false' THEN p.confkey
+    END AS foreignkey_fieldnum,
+    CASE
+        WHEN p.contype = 'false' THEN 'true'  
+        ELSE 'false'  END AS foreignkey,
+    CASE
+        WHEN p.contype = 'false' THEN p.conkey
+    END AS foreignkey_connnum
+FROM pg_attribute f  
+    JOIN pg_class c ON c.oid = f.attrelid  
+    JOIN pg_type t ON t.oid = f.atttypid  
+    LEFT JOIN pg_attrdef d ON d.adrelid = c.oid AND d.adnum = f.attnum  
+    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace  
+    LEFT JOIN pg_constraint p ON p.conrelid = c.oid AND f.attnum = ANY (p.conkey)  
+    LEFT JOIN pg_class AS g ON p.confrelid = g.oid  
+WHERE c.relkind = 'r'::char  
+    AND n.nspname = 'public'  -- Replace with Schema name  
+    AND c.relname = {tablename} -- Replace with table name  
+    AND f.attnum > 0 ORDER BY number
+;
+`)
+
+     res.json(query.rows);
+
+  } catch (error) {
+    console.log(error.message);
+  }
+})
+
+
+
+
 //ici je recupere en fonction de ce quil ya dans chaque table les cle primaire et les cles etrangere
-app.get('/keys', async(req, res) => {
+app.get('/api/keys', async(req, res) => {
 
  try {
    const query = await pool.query(`SELECT c.conname                                 AS constraint_name,
@@ -108,21 +143,6 @@ ORDER BY "self_schema", "self_table";`);
   catch (error) {
    console.log(error.message);
  }
-})
-
-
-//ici je veux recuperer toute les tables presente dans la base ainsi que les attributs associer a  chacune d'elle
-
-app.get('/fullsend', async(req, res)=>{
-  try {
-    const query = await pool.query(`SELECT * 
-    FROM INFORMATION_SCHEMA.COLUMNS`)
-
-     res.json(query.rows);
-
-  } catch (error) {
-    console.log(error.message);
-  }
 })
 
 

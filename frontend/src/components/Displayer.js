@@ -1,5 +1,10 @@
 import React, {useState, useEffect}from 'react'
+import Mininav from './Mininav'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Minidisplayer from './Minidisplayer'
+import Tableview from './Tableview'
 import Diagram from './Diagram'
+
 
 const Displayer = () => {
   //ici je  recupere la valeur clicked de mon props 
@@ -36,9 +41,15 @@ const Displayer = () => {
   console.log(table); 
 */
   return (
+    <Router>
     <div className="montreur">
-      <Diagram/>
+      <Mininav/>
+      <Switch>
+        <Route path="/Maincon/Displayer/Tableview" exact component ={Tableview} />
+        <Route path="/Maincon/Displayer/Diagram" component ={Diagram} />
+      </Switch>
     </div>
+    </Router>
   )
 }
 

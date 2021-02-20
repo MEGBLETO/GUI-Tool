@@ -87,3 +87,166 @@ SELECT TABLE_SCHEMA ,
        NUMERIC_SCALE ,
        DATETIME_PRECISION
 FROM   INFORMATION_SCHEMA.COLUMNS;
+
+
+
+
+SELECT * 
+    FROM INFORMATION_SCHEMA.COLUMNS`
+
+
+
+    SELECT kcu.column_name, kcu.ordinal_position
+FROM   information_schema.table_constraints tc
+INNER JOIN information_schema.key_column_usage kcu
+ON     tc.CONSTRAINT_CATALOG = kcu.CONSTRAINT_CATALOG
+AND    tc.CONSTRAINT_SCHEMA = kcu.CONSTRAINT_SCHEMA
+AND    tc.CONSTRAINT_NAME = kcu.CONSTRAINT_NAME
+WHERE  tc.table_schema = schema()             -- only look in the current schema
+AND    tc.constraint_type = 'PRIMARY KEY'
+AND    tc.table_name = 'clients'    -- specify your table.
+ORDER BY kcu.ordinal_position
+
+
+
+
+
+
+
+SELECT n.nspname as "Schema",
+  c.relname as "Name",
+  CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 'f' THEN 'foreign table' END as "Type",
+  pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+FROM pg_catalog.pg_class c
+     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+WHERE c.relkind IN ('r','v','m','S','f','')
+      AND n.nspname <> 'pg_catalog'
+      AND n.nspname <> 'information_schema'
+      AND n.nspname !~ '^pg_toast'
+  AND pg_catalog.pg_table_is_visible(c.oid)
+  AND tc.tale_name='clients'
+ORDER BY 1,2;
+
+
+
+
+select column_name, data_type, character_maximum_length, column_default, is_nullable
+from INFORMATION_SCHEMA.COLUMNS where table_name = 'clients';
+
+
+
+
+
+
+SELECT  
+    f.attnum AS number,  
+    f.attname AS name,  
+    f.attnum,  
+    f.attnotnull AS notnull,  
+    pg_catalog.format_type(f.atttypid,f.atttypmod) AS type,  
+    CASE  
+        WHEN p.contype = 'p' THEN 't'  
+        ELSE 'f'  
+    END AS primarykey,  
+    CASE  
+        WHEN p.contype = 'u' THEN 't'  
+        ELSE 'f'
+    END AS uniquekey,
+    CASE
+        WHEN p.contype = 'f' THEN g.relname
+    END AS foreignkey,
+    CASE
+        WHEN p.contype = 'f' THEN p.confkey
+    END AS foreignkey_fieldnum,
+    CASE
+        WHEN p.contype = 'f' THEN g.relname
+    END AS foreignkey,
+    CASE
+        WHEN p.contype = 'f' THEN p.conkey
+    END AS foreignkey_connnum
+FROM pg_attribute f  
+    JOIN pg_class c ON c.oid = f.attrelid  
+    JOIN pg_type t ON t.oid = f.atttypid  
+    LEFT JOIN pg_attrdef d ON d.adrelid = c.oid AND d.adnum = f.attnum  
+    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace  
+    LEFT JOIN pg_constraint p ON p.conrelid = c.oid AND f.attnum = ANY (p.conkey)  
+    LEFT JOIN pg_class AS g ON p.confrelid = g.oid  
+WHERE c.relkind = 'r'::char  
+    AND n.nspname = 'public'  -- Replace with Schema name  
+    AND c.relname = 'clients'  -- Replace with table name  
+    AND f.attnum > 0 ORDER BY number
+;
+
+
+
+
+ SELECT
+      a.attname AS Field,
+      t.typname || '(' || a.atttypmod || ')' AS Type,
+      CASE WHEN a.attnotnull = 't' THEN 'YES' ELSE 'NO' END AS Null,
+      CASE WHEN r.contype = 'p' THEN 'PRI' ELSE '' END AS Key,
+      (SELECT substring(pg_catalog.pg_get_expr(d.adbin, d.adrelid), '\'(.*)\'')
+              FROM
+                      pg_catalog.pg_attrdef d
+              WHERE
+                      d.adrelid = a.attrelid
+                      AND d.adnum = a.attnum
+                      AND a.atthasdef) AS Default,
+      '' as Extras
+  FROM
+        pg_class c 
+        JOIN pg_attribute a ON a.attrelid = c.oid
+        JOIN pg_type t ON a.atttypid = t.oid
+        LEFT JOIN pg_catalog.pg_constraint r ON c.oid = r.conrelid 
+                AND r.conname = a.attname
+  WHERE
+        c.relname = 'clients'
+        AND a.attnum > 0
+
+  ORDER BY a.attnum
+
+
+
+
+
+  /*The one we will be using for now on*/
+
+  
+SELECT  
+    f.attnum AS number,  
+    f.attname AS name,  
+    f.attnum,  
+    f.attnotnull AS notnull,  
+    pg_catalog.format_type(f.atttypid,f.atttypmod) AS type,  
+    CASE  
+        WHEN p.contype = 'p' THEN 'true'  
+        ELSE 'false'  
+    END AS primarykey,  
+    CASE  
+        WHEN p.contype = 'u' THEN 'true'  
+        ELSE 'f'
+    END AS uniquekey,
+    CASE
+        WHEN p.contype = 'false' THEN g.relname
+    END AS foreignkey,
+    CASE
+        WHEN p.contype = 'false' THEN p.confkey
+    END AS foreignkey_fieldnum,
+    CASE
+        WHEN p.contype = 'false' THEN 'true'  
+        ELSE 'false'  END AS foreignkey,
+    CASE
+        WHEN p.contype = 'false' THEN p.conkey
+    END AS foreignkey_connnum
+FROM pg_attribute f  
+    JOIN pg_class c ON c.oid = f.attrelid  
+    JOIN pg_type t ON t.oid = f.atttypid  
+    LEFT JOIN pg_attrdef d ON d.adrelid = c.oid AND d.adnum = f.attnum  
+    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace  
+    LEFT JOIN pg_constraint p ON p.conrelid = c.oid AND f.attnum = ANY (p.conkey)  
+    LEFT JOIN pg_class AS g ON p.confrelid = g.oid  
+WHERE c.relkind = 'r'::char  
+    AND n.nspname = 'public'  -- Replace with Schema name  
+    AND c.relname = 'factures'  -- Replace with table name  
+    AND f.attnum > 0 ORDER BY number
+;
