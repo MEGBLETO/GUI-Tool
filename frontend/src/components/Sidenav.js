@@ -8,14 +8,12 @@ const Sidenav = () => {
   //il sagit de recuper une array de array de json pour les liens de ma barre de navigation
   const navlinks = value1
   const data = navlinks[0]
-  console.log(data)
 
 
   //pour pouvoir mettre a jour mon state a chaque fois que linfo change
 
   const [clicked, setClicked] = value2
 
-  console.log(clicked)
 
   
   //recuperer dans une variable le nom du lien pour lutilliser pour recuperer les tables

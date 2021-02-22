@@ -62,9 +62,10 @@ app.get('/api/singletable/:tablename', async(req, res) => {
 
 app.get('/api/fullsend/:tablename', async(req, res)=>{
   try {
-    const {tablename} = req.params;
-    const query = await pool.query(`
-    SELECT  
+    const tablename = req.params.tablename;
+    console.log(tablename)
+
+    const query = await pool.query(`SELECT  
     f.attnum AS number,  
     f.attname AS name,  
     f.attnum,  
@@ -97,9 +98,10 @@ FROM pg_attribute f
     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace  
     LEFT JOIN pg_constraint p ON p.conrelid = c.oid AND f.attnum = ANY (p.conkey)  
     LEFT JOIN pg_class AS g ON p.confrelid = g.oid  
-WHERE c.relkind = 'r'::char  
+
+    WHERE c.relkind = 'r'::char  
     AND n.nspname = 'public'  -- Replace with Schema name  
-    AND c.relname = {tablename} -- Replace with table name  
+    AND c.relname = '${tablename}' -- Replace with table name  
     AND f.attnum > 0 ORDER BY number
 ;
 `)

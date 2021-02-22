@@ -1,7 +1,6 @@
 import React, {useState, useEffect}from 'react'
 import Mininav from './Mininav'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Minidisplayer from './Minidisplayer'
 import Tableview from './Tableview'
 import Diagram from './Diagram'
 

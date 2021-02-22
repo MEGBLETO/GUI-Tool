@@ -120,7 +120,6 @@ flex-direction: column;
 /*Ma mini bar de navigatio dans la partie affichage*/
 
 .mininav{
-  z-index: 6;
   display: flex;
   height: 8vh;
   width: 100%;
