@@ -247,6 +247,6 @@ FROM pg_attribute f
     LEFT JOIN pg_class AS g ON p.confrelid = g.oid  
 WHERE c.relkind = 'r'::char  
     AND n.nspname = 'public'  -- Replace with Schema name  
-    AND c.relname = 'factures'  -- Replace with table name  
+    AND c.relname = ${tablename}  -- Replace with table name  
     AND f.attnum > 0 ORDER BY number
 ;

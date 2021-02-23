@@ -77,7 +77,7 @@ app.get('/api/fullsend/:tablename', async(req, res)=>{
     END AS primarykey,  
     CASE  
         WHEN p.contype = 'u' THEN 'true'  
-        ELSE 'f'
+        ELSE 'false'
     END AS uniquekey,
     CASE
         WHEN p.contype = 'false' THEN g.relname

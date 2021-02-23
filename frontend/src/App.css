@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
 
 *{
   margin: 0;
@@ -171,14 +171,6 @@ color: maroon;
 }
 
 
-.tableview{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  place-items: center;
-}
 
 
 
@@ -242,7 +234,7 @@ color: maroon;
   position: relative;
   top: 5%;
   width: 50%;
-  height: 40%;
+  height: 45%;
   padding: 20px;
   margin: 0 auto;
   text-align: center;
@@ -272,6 +264,13 @@ color: maroon;
   width: 100%;
 }
 
+.item label{
+  flex: 1;
+}
+.item input{
+  flex: 1;
+}
+
 .item{
 display: flex;
 width: 80%;
@@ -295,7 +294,40 @@ margin: 15px;
 
 }
   
+/*Page de la table individuel*/
 
+.tableview{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding:10px;
+}
+
+
+.tableview h3{
+  text-align: center;
+  padding: 20px;
+  font-family:  'Cinzel', serif; 
+  font-weight: bold;
+}
+.clicked{
+  color: palevioletred;
+}
+
+
+/*ici je vais afficher le contenu de la structure de table*/
+
+.tablehead th{
+  border: 2px solid black;
+  padding: 10px;
+}
+
+.tablebody td{
+  padding: 10px;
+  border: 2px solid black;
+  text-align: center;
+}
 
 
 

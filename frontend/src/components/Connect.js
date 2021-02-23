@@ -16,12 +16,20 @@ const Connect = () => {
     
     <div className="items">
       <div className="item">
+        <label htmlFor="User">Database User:</label>
+        <input type="text"/>
+      </div>
+      <div className="item">
+        <label htmlFor="dbname">Database Host:</label>
+        <input type="text"/>
+      </div>
+      <div className="item">
         <label htmlFor="dbname">Database Name:</label>
         <input type="text"/>
       </div>
 
       <div className="item">
-        <label htmlFor="passeord">Password:</label>
+        <label htmlFor="password">Password:</label>
         <input type="text"/>
       </div>
       <div className="item">

@@ -3,23 +3,16 @@ import {LinkContext} from '../Contexts/Linkcontext'
 
 
 
-
-
-
 const Tableview = () => {
 /*Section pour recuperer la table demander */
 
 const {value1, value2} = useContext(LinkContext);
-
-
 
 //pour pouvoir mettre a jour mon state a chaque fois que linfo change
 
 const [clicked, setClicked] = value2
 
 console.log(clicked)
-
-
 
 
   const [table, setTable] = useState([])
@@ -44,26 +37,66 @@ console.log(clicked)
   //useEffect in order to fetch the data by calling a function
   useEffect(() =>{
     getTable()
-  },[]);
+  },[clicked]);
   
-  //ici je vais creer une fonction pour pouvoir construire ma table
+  /*ici on va utilliser linformation recu sous format json de notre api et cre un tableau */
 
+  /*Entete de ma table */
 
-  const mytable = (table) =>{
-    //table header
-    let cols = objet.keys(json[0])
+  const columnHeader = ["name","notnull","type","primarykey","uniquekey","foreignkey"]
 
-    let headerRows = cols.map(col => `<th>${col}`).join("");
+const generateHeader = () =>{
+
+  let result =[];
+  for(var i = 0; i < columnHeader.length; i++){
+     result.push(<th id={columnHeader[i]}>{columnHeader[i]}</th>)
   }
+  return result;
+}
 
 
-  //ici je map sur les column qe j'a cree
+/*Contenu de mes tables */
+const collectData = () =>{
+
+  let result = [];
 
   
+
+  for(var i=0 ; i < table.length; i++){
+       
+    var val = table[i];
+  
+    console.log(val)
+    result.push(
+      <tr key={i}>
+        <td>{val.name}</td>
+        <td>{val.notnull}</td>
+        <td>{val.type}</td>
+        <td>{val.primarykey}</td>
+        <td>{val.uniquekey}</td>
+        <td>{val.foreignkey}</td>
+
+      </tr>
+    )
+  }
+  return result;
+
+}
+
 
   return (
     <div className="tableview">
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sunt omnis vel dolorum modi laborum, esse voluptatibus blanditiis inventore fuga alias id voluptates atque mollitia laboriosam deserunt temporibus iste quos!</h1>
+      <h3>You are currently viewing the <span className="clicked">{clicked}</span> table structure</h3>
+      <table className="table">
+        <thead className="tablehead">
+          <tr className="tablerow">{generateHeader()}</tr>
+        </thead>
+        <tbody className="tablebody">
+        {table.map((item, index) =>( 
+           collectData()
+        ))}
+        </tbody>
+      </table>
     </div>
   )
 }
