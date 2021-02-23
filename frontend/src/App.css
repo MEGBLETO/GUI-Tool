@@ -255,6 +255,12 @@ color: maroon;
 
 
 
+.table{
+  width:100%;
+}
+
+
+
 .items{
   flex: 2 1 40rem;
   display: flex;
@@ -324,11 +330,19 @@ margin: 15px;
 }
 
 .tablebody td{
-  padding: 10px;
+  padding: 6px;
   border: 2px solid black;
   text-align: center;
+  background-color: #333;
+  color: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .2s ease-in-out;
 }
 
+.tablebody td:hover{
+  transform: scale(1.2);
+}
 
 
 
@@ -339,6 +353,30 @@ margin: 15px;
   .connect{
     width: 70%;
   }
+
+
+
+
+  /*ici je vais afficher le contenu de la structure de table*/
+
+
+.tablehead th{
+  border: 2px solid black;
+  padding: 8px;
+}
+
+.tablebody td{
+  padding: 8px;
+  border: 2px solid black;
+  text-align: center;
+}
+
+.table{
+  width: 80%;
+}
+
+
+
 
 }
 

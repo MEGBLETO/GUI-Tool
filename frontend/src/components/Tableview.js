@@ -62,7 +62,7 @@ const collectData = () =>{
 
   
 
-  for(var i=0 ; i < table.length; i++){
+  for(var i=0 ; i< table.length; i++){
        
     var val = table[i];
   
