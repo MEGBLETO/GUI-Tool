@@ -1,7 +1,4 @@
 import React from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Diagram from './Diagram'
-import Tableview from './Tableview'
 import {Link} from 'react-router-dom'
 
 const Mininav = () => {

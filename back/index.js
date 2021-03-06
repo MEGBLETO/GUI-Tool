@@ -12,6 +12,46 @@ app.use(express.json()); //req.body
 
 
 //My routes 
+   var user = "";
+    var  host = "";
+    var  dbname = "";
+     var  password = "";
+     var port = 0;
+    
+  
+/*Here is a post route for posting the form data to my server */
+
+app.post('/api/submit', async (req, res) =>{
+    
+  try {
+    res.send('Post request connect page')
+    console.log("i got some data from your frontend")     
+    user = req.body.answer.user;
+    host = req.body.answer.host;
+    dbname = req.body.answer.dbname;
+    password = req.body.answer.password;
+    port = req.body.answer.port;
+     
+
+    /*ici je vais exporter mes variables */
+    module.exports.user=user
+    module.exports.host=host
+    module.exports.password=password
+    module.exports.dbname=dbname
+    module.exports.port=port
+ 
+
+  } catch (error) { 
+    console.log(error.message)  
+  }
+  //console.log(user,host,dbname,password,port)
+} )
+
+
+ 
+console.log(user,host,dbname,password,port)
+
+
 
 
 //ici je recupere le type de la donnee presente dans une table que nous aurons defini
@@ -146,9 +186,6 @@ ORDER BY "self_schema", "self_table";`);
    console.log(error.message);
  }
 })
-
-
-
 
 
 app.listen(5000, () => {

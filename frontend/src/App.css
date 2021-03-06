@@ -8,6 +8,10 @@
 }
 
 
+body{
+  scroll-behavior: smooth;
+}
+
 
 .entete{
   display: flex;
@@ -121,6 +125,7 @@ flex-direction: column;
 
 .mininav{
   display: flex;
+  z-index: 6;
   height: 8vh;
   width: 100%;
   background-color: #333;
@@ -162,13 +167,47 @@ color: maroon;
 
 
 .diagram{
+  display: flex;
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  place-items: center;
-
 
 }
+
+
+.diholder{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 20px;
+  width: 100%;
+  background-color: rgb(116, 196, 144);
+}
+
+
+/*Diagram tables*/
+.tabled{
+  max-width: 400px;
+}
+
+.tableheadd th{
+  border: 2px solid black;
+  padding: 6px;
+}
+
+.tablebodyd td{
+  padding: 1.5px;
+  border: 2px solid black;
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+}
+
+.tablebodyd td:hover{
+  transform: scale(1.2);
+}
+
+
 
 
 
@@ -271,7 +310,9 @@ color: maroon;
 }
 
 .item label{
+  display: flex;
   flex: 1;
+  justify-content: flex-start;
 }
 .item input{
   flex: 1;

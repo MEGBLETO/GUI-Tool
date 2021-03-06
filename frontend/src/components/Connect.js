@@ -5,7 +5,7 @@ import {Modalcontext} from '../Contexts/Modalcontext'
 const Connect = () => {
   const [showModal, setShowModal] = useContext(Modalcontext)
 
-  //data de mon formulaire
+  /* //data de mon formulaire
   const  [data, setData] = useState({
     user: "",
     host:"",
@@ -16,7 +16,8 @@ const Connect = () => {
 
 
 
-  async function postData(url = 'http://localhost:5000/api/submit', donnee={data}) {
+   const postData = async(url = 'http://localhost:5000/api/submit', donnee={data}) =>{
+       
     // Default options are marked with *
     const response = await fetch(url, {
       method: 'POST', 
@@ -42,22 +43,22 @@ const Connect = () => {
     const handle = (e) =>{
       const newData = {... data}
 
-      /*Here i'm getting the id of the event that got fired and then setting it to it value */
+      Here i'm getting the id of the event that got fired and then setting it to it value 
       newData[e.target.id] = e.target.value
+      */
 
-      /*Now i.m updating my state */
+      /*Now i.m updating my state 
       setData(newData)
       console.log(newData)
     }
-
-
+*/
   
 
   return (
     <>
     {showModal ?
     <div className="modal-container" >
-    <form className="connect" onSubmit={(e)=> postData(e)}>
+  {/*}  <form className="connect" onSubmit={(e)=> postData(e)}>
       <div className="head">
         <h1>Se Connecter</h1>
       </div>
@@ -86,10 +87,10 @@ const Connect = () => {
       </div>
     </div>
     <div className="submit">
-      <button onClick={postData}>Connecter</button>
+      <button type="submit" onClick={postData}>Connecter</button>
     </div>
-    </form> 
-    </div>: null}
+    </form> {*/}
+  </div>: null}
     </>
 
   )

@@ -6,17 +6,17 @@ import {LinkContext} from '../Contexts/Linkcontext'
 const Tableview = () => {
 /*Section pour recuperer la table demander */
 
-const {value1, value2} = useContext(LinkContext);
+const {value2} = useContext(LinkContext);
 
 //pour pouvoir mettre a jour mon state a chaque fois que linfo change
 
 const [clicked, setClicked] = value2
 
-console.log(clicked)
+//console.log(clicked)
 
 
   const [table, setTable] = useState([])
-  console.log(table)
+  //console.log(table)
 
 
   
@@ -27,7 +27,7 @@ console.log(clicked)
       
       const res = await fetch(`http://localhost:5000/api/fullsend/${clicked}`);
       const jsonres = await res.json();
-      console.log(jsonres)
+      //console.log(jsonres)
       setTable(jsonres)
     } catch (error) {
       console.log(error.message);
@@ -60,8 +60,6 @@ const collectData = () =>{
 
   let result = [];
 
-  
-
   for(var i=0 ; i< table.length; i++){
        
     var val = table[i];
@@ -92,9 +90,9 @@ const collectData = () =>{
           <tr className="tablerow">{generateHeader()}</tr>
         </thead>
         <tbody className="tablebody">
-        {table.map((item, index) =>( 
-           collectData()
-        ))}
+      
+           {collectData()}
+  
         </tbody>
       </table>
     </div>
