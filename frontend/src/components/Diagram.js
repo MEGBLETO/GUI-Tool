@@ -8,7 +8,6 @@ const Diagram = () => {
    //ici je recupere le nom des tables presente dans la base et ensuite je les inseres dans une array(plus simple a parcourir pour moi)
 
    const [tables, SetTablesnames] = useState([])
-   const [isfetched, setisfetched] = useState(false)
 
 
    const getTablesNames = async() =>{
@@ -45,7 +44,6 @@ tables.forEach((table, index) => tablesArray.push(table.table_name) )
   return (
     <div className="diagram"> 
    <Diholder tablearray={tablesArray}/>
-     <Diholder tablearray={tablesArray}/>
     </div>
   )
 }

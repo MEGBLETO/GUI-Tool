@@ -73,7 +73,6 @@ const collectData = () =>{
         <td>{val.primarykey}</td>
         <td>{val.uniquekey}</td>
         <td>{val.foreignkey}</td>
-
       </tr>
     )
   }

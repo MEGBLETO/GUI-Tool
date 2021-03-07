@@ -7,14 +7,12 @@ const Diholder = ({tablearray})=> {
 
   /*ici je recuper ma liste de table */
   const tablesArray  = tablearray
-
 //console.log(tablesArray)
 
 
-const [table, setTable]= useState()
+const [table, setTable]= useState([])
+
 console.log(table)
-
-
 const getEachTable = async () =>{
   try {
 
@@ -34,6 +32,7 @@ const getEachTable = async () =>{
 }
 
 useEffect(() => {
+  console.log("i fire once")
  getEachTable()
 },[tablesArray]);
 
@@ -42,7 +41,7 @@ useEffect(() => {
 
   /*Entete de ma table */
 
-  const columnHeader = ["name","type","primarykey","foreignkey"]
+  const columnHeader = ["name","primarykey","foreignkey"]
 
 
   const generateHeader = () =>{
@@ -54,18 +53,26 @@ useEffect(() => {
     return result;
   }
   
-  
-
 
 
   return (
 <div className="diholder">
-{table.map((tab, index) =>(
- <table className="tabled">
-   
+
+{ table.map((tab, index) =>(
+ <table key={index} className="tabled">
  <thead className="tableheadd">
-    <tr className="tablerowd"> {generateHeader()}</tr>
+   <tr className="tablerowdd"></tr>
+    <tr className="tablerowdd"> {generateHeader()}</tr>
  </thead>
+   {tab.map((tabledetails) =>{
+     return  <tbody className="tablebodyd">
+    <tr>
+        <td id={tabledetails.name}>{tabledetails.name}</td>
+        <td id={tabledetails.primarykey}>{tabledetails.primarykey}</td>
+        <td id={tabledetails.foreignkey}>{tabledetails.foreignkey}</td>
+      </tr>
+   </tbody>
+   })}
 </table>
 ))}
 </div>

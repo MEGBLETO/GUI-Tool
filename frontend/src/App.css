@@ -53,7 +53,7 @@ body{
   display: flex;
   width: 100%;
   background-color: #fff;
-  height: 200vh;
+  min-height: 200vh;
   z-index: -100;
 }
 
@@ -178,13 +178,14 @@ color: maroon;
   grid-template-columns: repeat(2, 1fr);
   padding: 20px;
   width: 100%;
-  background-color: rgb(116, 196, 144);
+  place-items: center;
 }
 
 
 /*Diagram tables*/
 .tabled{
   max-width: 400px;
+  padding: 20px ;
 }
 
 .tableheadd th{
