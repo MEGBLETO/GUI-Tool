@@ -5,7 +5,7 @@ import {Modalcontext} from '../Contexts/Modalcontext'
 const Connect = () => {
   const [showModal, setShowModal] = useContext(Modalcontext)
 
-  /* //data de mon formulaire
+   //data de mon formulaire
   const  [data, setData] = useState({
     user: "",
     host:"",
@@ -41,24 +41,24 @@ const Connect = () => {
 
 
     const handle = (e) =>{
-      const newData = {... data}
+      const newData = {...data}
 
-      Here i'm getting the id of the event that got fired and then setting it to it value 
+     // Here i'm getting the id of the event that got fired and then setting it to it value 
       newData[e.target.id] = e.target.value
-      */
+      
 
-      /*Now i.m updating my state 
+      //Now i.m updating my state 
       setData(newData)
       console.log(newData)
     }
-*/
+
   
 
   return (
     <>
     {showModal ?
     <div className="modal-container" >
-  {/*}  <form className="connect" onSubmit={(e)=> postData(e)}>
+    <form className="connect" onSubmit={(e)=> postData(e)}>
       <div className="head">
         <h1>Se Connecter</h1>
       </div>
@@ -89,7 +89,7 @@ const Connect = () => {
     <div className="submit">
       <button type="submit" onClick={postData}>Connecter</button>
     </div>
-    </form> {*/}
+    </form> 
   </div>: null}
     </>
 

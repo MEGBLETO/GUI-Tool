@@ -12,7 +12,7 @@ const Mininav = () => {
 
        <div className="num2">
        <Link to= '/Maincon/Displayer/Diagram'>
-         <h3>View relations</h3>
+         <h3>View relationships</h3>
        </Link>
        </div>
     </div>

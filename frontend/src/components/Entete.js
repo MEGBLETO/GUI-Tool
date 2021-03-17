@@ -15,10 +15,6 @@ const Entete = () => {
   return (
     <div className="entete">
       <h1>GUI <span>Tool</span></h1>
-      
-      
-
-
       <button id="btn" onClick={openModal}>Se Connecter</button>
     </div>
   )
