@@ -3,6 +3,7 @@ const { Pool } = require('pg');
 require('dotenv').config();
 //const {pool} = require('./config/dbconfig');
 const cors = require('cors');
+//const { Pool } = require('pg');
 
 //initialisation de express
 const app = express()
@@ -12,37 +13,47 @@ app.use(cors());
 app.use(express.json()); //req.body
 
 
-//connection base postgres
-const connect = () =>{
- console.log(data);
-}
 
-const pool = new Pool({
-   user:  process.env.user,
-  host:  process.env.host,
-  database:  process.env.database,
-  password:  process.env.password,
-  port:  process.env.port
-})
+
+//my data
+
+
+
 
 //My routes 
- 
+var user="";
+var host ="";
+var dbname;
+var password = "";
+var port;
+
 /*Here is a post route for posting the form data to my server */
-app.post('/api/submit', async (req, res) =>{ 
+app.post('/api/submit', (req, res) =>{ 
   try {
-    console.log("i got some data from your frontend")     
-     //console.log(req.body)
-      data = await req.body.answer
-     connect(data);
- 
-    //console.log(data) 
-  } catch (error) { 
-    console.log(error.message)  
+    res.send("i got some data from your frontend")     
+     
+     user = req.body.answer.user
+     host  = req.body.answer.host
+     dbname =  req.body.answer.dbname
+     password = req.body.answer.password
+     port =  req.body.answer.port
+
+     
+     //console.log(data) 
+    } catch (error) { 
+      console.log(error.message)  
   }
-})
-
-
-
+  const pool = new Pool({
+    user: process.env.user,
+    host:  process.env.host,
+    database: `${dbname}`,
+    password:  process.env.password,
+    port:  process.env.port
+  },
+  //console.log(user, host, dbname, password, port)
+  )
+  
+  console.log(pool.user)
 
 
 //ici je recupere le type de la donnee presente dans une table que nous aurons defini
@@ -99,7 +110,7 @@ app.get('/api/fullsend/:tablename', async(req, res)=>{
     const query = await pool.query(`SELECT  
     f.attnum AS number,  
     f.attname AS name,  
-    f.attnum,  
+    f.attnum,   
     f.attnotnull AS notnull,  
     pg_catalog.format_type(f.atttypid,f.atttypmod) AS type,  
     CASE  
@@ -156,7 +167,7 @@ app.get('/api/foreignkey/:table', async(req, res) => {
    const query = await pool.query(`SELECT
    tc.table_schema, 
    tc.constraint_name, 
-   tc.table_name, 
+   tc.table_name,
    kcu.column_name, 
    ccu.table_schema AS foreign_table_schema,
    ccu.table_name AS foreign_table_name,
@@ -176,6 +187,10 @@ WHERE tc.constraint_type = 'FOREIGN KEY' AND tc.table_name= '${table}';`);
    console.log(error.message);
  }
 })
+
+
+})
+
 
 
 app.listen(5000, () => {
