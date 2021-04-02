@@ -16,8 +16,7 @@ const Connect = () => {
 
 
 
-   const postData = async(url = 'http://localhost:5000/api/submit', donnee={data}) =>{
-       
+   const postData = async (url = 'http://localhost:5000/api/submit', donnee={data}) =>{
     // Default options are marked with *
     const response = await fetch(url, {
       method: 'POST', 
@@ -46,7 +45,7 @@ const Connect = () => {
      // Here i'm getting the id of the event that got fired and then setting it to it value 
       newData[e.target.id] = e.target.value
       
-
+      
       //Now i.m updating my state 
       setData(newData)
       console.log(newData)
@@ -58,7 +57,7 @@ const Connect = () => {
     <>
     {showModal ?
     <div className="modal-container" >
-    <form className="connect" onSubmit={(e)=> postData(e)}>
+    <form className="connect" onSubmit={postData}>
       <div className="head">
         <h1>Se Connecter</h1>
       </div>
@@ -66,24 +65,24 @@ const Connect = () => {
     <div className="items">
       <div className="item">
         <label htmlFor="user">Database User:</label>
-        <input type="text" onChange={(e) =>handle(e)} id="user" value={data.user}/>
+        <input type="text" onChange={handle} id="user" value={data.user}/>
       </div>
       <div className="item">
         <label htmlFor="dbhost">Database Host:</label>
-        <input type="text"  onChange={(e) =>handle(e)} id="host" value={data.host}/>
+        <input type="text"  onChange={handle} id="host" value={data.host}/>
       </div>
       <div className="item">
         <label htmlFor="dbname">Database Name:</label>
-        <input type="text"  onChange={(e) =>handle(e)} id="dbname" value={data.dbname}/>
+        <input type="text"  onChange={handle} id="dbname" value={data.dbname}/>
       </div>
 
       <div className="item">
         <label htmlFor="password">Password:</label>
-        <input type="password"  onChange={(e) =>handle(e)} id="password" value={data.password}/>
+        <input type="password"  onChange={handle} id="password" value={data.password}/>
       </div>
       <div className="item">
         <label htmlFor="port">Port Number:</label>
-        <input type="text"  onChange={(e) =>handle(e)} id="port" value={data.port}/>
+        <input type="text"  onChange={handle} id="port" value={data.port}/>
       </div>
     </div>
     <div className="submit">

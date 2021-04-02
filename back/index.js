@@ -13,13 +13,6 @@ app.use(cors());
 app.use(express.json()); //req.body
 
 
-
-
-//my data
-
-
-
-
 //My routes 
 var user="";
 var host ="";
@@ -34,7 +27,7 @@ app.post('/api/submit', (req, res) =>{
      
      user = req.body.answer.user
      host  = req.body.answer.host
-     dbname =  req.body.answer.dbname
+     dbname = req.body.answer.dbname;
      password = req.body.answer.password
      port =  req.body.answer.port
 
@@ -47,10 +40,11 @@ app.post('/api/submit', (req, res) =>{
     user: process.env.user,
     host:  process.env.host,
     database: `${dbname}`,
-    password:  process.env.password,
-    port:  process.env.port
+    password: `${password}`,
+    port:  `${port}`
   },
-  //console.log(user, host, dbname, password, port)
+  console.log(user, host, dbname, password, port)
+  //console.log(dbname)
   )
   
   console.log(pool.user)
