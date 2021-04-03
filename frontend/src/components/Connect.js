@@ -82,11 +82,11 @@ const Connect = () => {
       </div>
       <div className="item">
         <label htmlFor="port">Port Number:</label>
-        <input type="text"  onChange={handle} id="port" value={data.port}/>
+        <input type="number"  onChange={handle} id="port" value={data.port}/>
       </div>
     </div>
     <div className="submit">
-      <button type="submit" onClick={postData}>Connecter</button>
+      {/*<button type="submit" onClick={postData}>Connecter</button>*/}
     </div>
     </form> 
   </div>: null}

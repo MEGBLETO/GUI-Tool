@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -94,17 +94,15 @@ flex-direction: column;
 
 .navbar nav ul li a{
   text-decoration: none;
+  font-size: 20px;
+  font-family: 'Staatliches', cursive;
+  transition: .2s ease-in-out;
   color: black;
-  font-size: 15px;
-  font-family: 'Bungee Shade', cursive; 
-  transition: .2s ease-in ease-in-out;
-
 }
 
 .navbar nav ul li a:hover{
-  
+  font-size: 30px;
   color: maroon;
-
 }
 
 

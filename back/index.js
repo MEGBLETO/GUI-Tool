@@ -37,8 +37,8 @@ app.post('/api/submit', (req, res) =>{
       console.log(error.message)  
   }
   const pool = new Pool({
-    user: process.env.user,
-    host:  process.env.host,
+    user: `${user}`,
+    host:  `${host}`,
     database: `${dbname}`,
     password: `${password}`,
     port:  `${port}`

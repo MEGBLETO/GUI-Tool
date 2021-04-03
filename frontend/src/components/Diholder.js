@@ -36,7 +36,7 @@ const getEachTable = async () =>{
 }
 
 useEffect(() => {
-  console.log("i fire once")
+  //console.log("i fire once")
  getEachTable();
  getKeys();
 },[tablesArray]);
@@ -75,7 +75,7 @@ const getKeys = async() =>{
     setKeys(tables)
 }
 
-console.log(key)
+//console.log(key)
 /***************************************************************************************************************************************** */
 
   return (
@@ -102,10 +102,10 @@ console.log(key)
 ))}
 
 {key.map((fk, index) =>(
-    fk.map((eachfk) =>{
-      console.log(eachfk.foreign_column_name);
-      console.log(eachfk.column_name)
-      return <Xarrow key={index} strokeWidth={5} strokeLen ={10} dashness={{ nonStrokeLen: 15, animation: -1.5 }}  color="purple" headColor="green" 
+    fk.map((eachfk, key) =>{
+      //console.log(eachfk.foreign_column_name);
+      //console.log(eachfk.column_name)
+      return <Xarrow key={key} strokeWidth={5} strokeLen ={10} dashness={{ nonStrokeLen: 15, animation: -1.5 }}  color="purple" headColor="green" 
       endAnchor= {{ position: "auto", offset: { rightness: 20 } }}
       start={eachfk.foreign_column_name} end={eachfk.table_name} />
     })
